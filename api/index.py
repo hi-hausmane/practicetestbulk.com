@@ -6,6 +6,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from main import app
+from mangum import Mangum
 
-# This is the handler that Vercel will call
-handler = app
+# Wrap FastAPI app with Mangum for AWS Lambda/Vercel compatibility
+handler = Mangum(app, lifespan="off")
