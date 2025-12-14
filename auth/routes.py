@@ -19,10 +19,14 @@ SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 SUPABASE_JWT_SECRET = os.getenv("SUPABASE_JWT_SECRET", SUPABASE_KEY)  # Add this
 
+# Initialize supabase client if credentials are available
+supabase_client = None
 if not SUPABASE_URL or not SUPABASE_KEY:
-    raise RuntimeError("SUPABASE_URL and SUPABASE_KEY must be set in .env")
-
-supabase_client = create_client(SUPABASE_URL, SUPABASE_KEY)
+    logger.warning("⚠️  SUPABASE_URL and SUPABASE_KEY not set - Authentication will not work!")
+    logger.warning("Please set environment variables in Vercel: Settings → Environment Variables")
+else:
+    supabase_client = create_client(SUPABASE_URL, SUPABASE_KEY)
+    logger.info("✓ Supabase client initialized successfully")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 auth_router = APIRouter()
@@ -34,6 +38,14 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
+
+    # Check if Supabase is configured
+    if not supabase_client:
+        raise HTTPException(
+            status_code=503,
+            detail="Authentication service not configured. Please contact administrator."
+        )
+
     try:
         print(f"[AUTH] Validating token. SUPABASE_JWT_SECRET exists: {bool(SUPABASE_JWT_SECRET)}")
         print(f"[AUTH] Token (first 20 chars): {token[:20]}...")
@@ -114,6 +126,11 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
 
 @auth_router.post("/register")
 async def register(username: str = Body(...), email: str = Body(...), password: str = Body(...)):
+    if not supabase_client:
+        raise HTTPException(
+            status_code=503,
+            detail="Authentication service not configured. Please set SUPABASE_URL and SUPABASE_KEY environment variables."
+        )
     try:
         auth_response = supabase_client.auth.sign_up({
             "email": email,
@@ -168,6 +185,11 @@ async def register(username: str = Body(...), email: str = Body(...), password: 
 
 @auth_router.post("/login")
 async def login(email: str = Body(...), password: str = Body(...)):
+    if not supabase_client:
+        raise HTTPException(
+            status_code=503,
+            detail="Authentication service not configured. Please set SUPABASE_URL and SUPABASE_KEY environment variables."
+        )
     try:
         auth_response = supabase_client.auth.sign_in_with_password({
             "email": email,
