@@ -1,12 +1,16 @@
 # api/index.py - Vercel Serverless Handler
+from mangum import Mangum
 import sys
 import os
 
 # Add parent directory to path so we can import from main.py
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from main import app
-from mangum import Mangum
+# Import the FastAPI app
+from main import app as fastapi_app
 
-# Wrap FastAPI app with Mangum for AWS Lambda/Vercel compatibility
-handler = Mangum(app, lifespan="off")
+# Mangum adapter for serverless
+handler = Mangum(fastapi_app, lifespan="off")
+
+# Vercel also checks for 'app'
+app = handler
