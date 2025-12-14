@@ -59,8 +59,10 @@ app = FastAPI(
     ]
 )
 
-# Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# Mount static files (skip on Vercel serverless)
+import sys
+if "VERCEL" not in os.environ:
+    app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Templates
 templates = Jinja2Templates(directory="templates")
