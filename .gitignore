@@ -55,3 +55,7 @@ audio/
 # Temporary files
 tmp/
 temp/
+
+# Vercel
+.vercel
+.vercel/
