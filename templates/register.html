@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Account - PracticeTestBulk</title>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Udemy Theme CSS -->
+  <link rel="stylesheet" href="/static/css/udemy-theme.css">
+</head>
+<body style="background-color: var(--udemy-gray-100); min-height: 100vh;">
+
+  <!-- Navigation -->
+  <nav class="udemy-nav" style="position: sticky; top: 0; z-index: 100;">
+    <div class="udemy-container" style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="/" style="font-size: 1.5rem; font-weight: 700; color: var(--udemy-purple); text-decoration: none;">
+        PracticeTestBulk
+      </a>
+      <a href="/login" class="udemy-btn udemy-btn-outline udemy-btn-md">
+        Sign In
+      </a>
+    </div>
+  </nav>
+
+  <!-- Register Form -->
+  <div style="min-height: calc(100vh - 73px); display: flex; align-items: center; justify-content: center; padding: 40px 16px;">
+    <div style="max-width: 480px; width: 100%;">
+      <!-- Card -->
+      <div class="udemy-card-elevated" style="padding: 48px;">
+        <div style="text-align: center; margin-bottom: 32px;">
+          <h1 class="udemy-h2" style="margin-bottom: 8px;">Create your account</h1>
+          <p class="udemy-body" style="color: var(--udemy-gray-600);">Start generating practice tests in seconds</p>
+        </div>
+
+        <!-- Email/Password Form -->
+        <form id="register-form" style="display: flex; flex-direction: column; gap: 20px;">
+          <div>
+            <label for="username" class="udemy-label">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              minlength="3"
+              maxlength="20"
+              pattern="[a-zA-Z0-9_]+"
+              class="udemy-input"
+              placeholder="johndoe"
+            />
+            <span class="udemy-helper-text">3-20 characters, letters, numbers, and underscores only</span>
+          </div>
+
+          <div>
+            <label for="email" class="udemy-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="udemy-input"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label for="password" class="udemy-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              class="udemy-input"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="udemy-btn udemy-btn-primary udemy-btn-lg"
+            style="width: 100%; margin-top: 8px;"
+          >
+            Create Account
+          </button>
+        </form>
+
+        <!-- Divider -->
+        <div style="position: relative; margin: 32px 0;">
+          <div style="position: absolute; inset: 0; display: flex; align-items: center;">
+            <div style="width: 100%; border-top: 1px solid var(--udemy-gray-400);"></div>
+          </div>
+          <div style="position: relative; display: flex; justify-content: center;">
+            <span class="udemy-body-sm" style="padding: 0 16px; background-color: var(--udemy-white); color: var(--udemy-gray-600);">or</span>
+          </div>
+        </div>
+
+        <!-- Google OAuth -->
+        <a
+          href="https://xyiembiswrhhdaalntet.supabase.co/auth/v1/authorize?provider=google"
+          style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; box-sizing: border-box; padding: 12px 24px; background-color: var(--udemy-white); border: 1px solid var(--udemy-gray-400); border-radius: 4px; font-size: 1rem; font-weight: 600; color: var(--udemy-gray-900); text-decoration: none; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); cursor: pointer;"
+          onmouseover="this.style.backgroundColor='var(--udemy-gray-100)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.1)';"
+          onmouseout="this.style.backgroundColor='var(--udemy-white)'; this.style.boxShadow='0 1px 2px rgba(0, 0, 0, 0.05)';"
+        >
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" style="width: 20px; height: 20px;">
+          <span>Continue with Google</span>
+        </a>
+
+        <!-- Login Link -->
+        <div style="margin-top: 32px; text-align: center;">
+          <span class="udemy-body" style="color: var(--udemy-gray-600);">
+            Already have an account?
+            <a href="/login" style="color: var(--udemy-purple); font-weight: 600; text-decoration: none;">
+              Sign in
+            </a>
+          </span>
+        </div>
+      </div>
+
+      <!-- Footer Text -->
+      <p class="udemy-caption" style="text-align: center; color: var(--udemy-gray-600); margin-top: 24px;">
+        No credit card required • Free tier available
+      </p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/static/js/pages/register.js"></script>
+</body>
+</html>

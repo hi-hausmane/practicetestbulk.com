@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Practice Test Generator for Udemy Instructors | Create Quality Exams in Minutes</title>
+  <meta name="description" content="Generate professional Udemy practice tests with AI in seconds. Perfect for online instructors and course creators. Export ready-to-upload CSV files.">
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Udemy Theme CSS -->
+  <link rel="stylesheet" href="/static/css/udemy-theme.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="udemy-nav" style="position: sticky; top: 0; z-index: 100;">
+    <div class="udemy-container" style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="font-size: 1.5rem; font-weight: 700; color: var(--udemy-purple);">
+        PracticeTestBulk
+      </div>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <a href="/login" id="nav-login" class="udemy-nav-link">Login</a>
+        <a href="/register" id="nav-signup" class="udemy-btn udemy-btn-primary udemy-btn-md" style="text-decoration: none;">
+          Sign Up
+        </a>
+        <a href="/app" id="nav-app" class="udemy-btn udemy-btn-primary udemy-btn-md" style="display: none; text-decoration: none;">
+          Go to App
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section style="background-color: var(--udemy-white); padding: 80px 0;">
+    <div class="udemy-container">
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <!-- Badge -->
+        <div style="margin-bottom: 24px;">
+          <span class="udemy-badge udemy-badge-purple" style="font-size: 0.875rem; padding: 8px 16px;">
+            💰 Transform Your Knowledge Into Passive Income
+          </span>
+        </div>
+
+        <!-- Main Heading -->
+        <h1 class="udemy-h1" style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 24px;">
+          Launch Your Udemy Course in 60 Seconds
+        </h1>
+
+        <!-- Subheading -->
+        <p class="udemy-body" style="font-size: 1.25rem; color: var(--udemy-gray-600); margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
+          Stop spending hours writing practice test questions. Let AI generate high-quality, course-specific exam questions that engage your students and boost completion rates.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px;">
+          <a href="/register" id="cta-button" class="udemy-btn udemy-btn-primary udemy-btn-lg" style="min-width: 260px; text-decoration: none; font-size: 1.125rem;">
+            🚀 Launch Your Course Now
+          </a>
+          <a href="#how-it-works" class="udemy-btn udemy-btn-secondary udemy-btn-lg" style="text-decoration: none;">
+            See How It Works
+          </a>
+        </div>
+
+        <!-- Trust Indicators -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; font-size: 0.9rem; color: var(--udemy-gray-700);">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>20 Free Questions</strong></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>50 Questions in 60 Seconds</strong></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>No Credit Card Required</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Demo Preview Card -->
+      <div style="max-width: 900px; margin: 64px auto 0;">
+        <div class="udemy-card-elevated" style="padding: 32px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+            <div>
+              <p class="udemy-overline" style="margin-bottom: 12px;">Sample Course</p>
+              <h4 class="udemy-h4" style="font-size: 1.125rem; margin-bottom: 8px;">Complete Python Programming</h4>
+              <p class="udemy-caption">25 questions • Mixed difficulty</p>
+              <p class="udemy-caption">Beginner-friendly explanations</p>
+            </div>
+            <div>
+              <p class="udemy-overline" style="margin-bottom: 12px;">Generated Question</p>
+              <div style="background-color: var(--udemy-gray-100); border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 16px;">
+                <p class="udemy-body-sm" style="font-weight: 600; margin-bottom: 8px;">What is the correct way to create a variable in Python?</p>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <span class="udemy-badge udemy-badge-success">CSV Ready</span>
+                  <span class="udemy-badge udemy-badge-purple">AI Generated</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pain Points Section -->
+  <section style="background-color: var(--udemy-gray-100); padding: 80px 0;">
+    <div class="udemy-container">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <h2 class="udemy-h2" style="margin-bottom: 16px;">
+          Your Course Is Ready...<br>
+          <span style="color: var(--udemy-warning);">But Tests Are Blocking You 😤</span>
+        </h2>
+        <p class="udemy-body" style="font-size: 1.125rem; color: var(--udemy-gray-600);">These obstacles are preventing you from earning money:</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 48px;">
+        <!-- Pain 1 -->
+        <div class="udemy-card" style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 16px;">💸</div>
+          <h3 class="udemy-h4" style="color: var(--udemy-warning); margin-bottom: 12px;">Revenue Blocked</h3>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            Your course is done, but <strong>Udemy requires practice tests</strong> to publish. Every day delayed = money lost. 8 hours of tedious work separates you from your first earnings.
+          </p>
+        </div>
+
+        <!-- Pain 2 -->
+        <div class="udemy-card" style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 16px;">🔥</div>
+          <h3 class="udemy-h4" style="color: var(--udemy-warning); margin-bottom: 12px;">Fear of Failure</h3>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            Poorly designed questions = bad reviews = fewer sales. You stress over each question, knowing test quality <strong>directly impacts your revenue</strong>.
+          </p>
+        </div>
+
+        <!-- Pain 3 -->
+        <div class="udemy-card" style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 16px;">⏰</div>
+          <h3 class="udemy-h4" style="color: var(--udemy-warning); margin-bottom: 12px;">Time = Money</h3>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            While you struggle with tests, your competitors are <strong>already launching their 3rd course</strong> and accumulating passive income. You're falling behind.
+          </p>
+        </div>
+      </div>
+
+      <!-- Solution Banner -->
+      <div class="udemy-card-elevated" style="text-align: center; max-width: 800px; margin: 0 auto; padding: 48px 32px; background: linear-gradient(135deg, var(--udemy-success-lightest) 0%, var(--udemy-white) 100%); border: 2px solid var(--udemy-success);">
+        <div style="font-size: 3.5rem; margin-bottom: 16px;">💰✅</div>
+        <h3 class="udemy-h3" style="color: var(--udemy-success); margin-bottom: 16px;">
+          Publish Your Course TODAY
+        </h3>
+        <p class="udemy-body" style="font-size: 1.125rem; color: var(--udemy-gray-700); margin-bottom: 12px;">
+          <strong>60 seconds to create your tests.</strong> Not 8 hours.<br>
+          Start earning money tonight instead of waiting until next week.
+        </p>
+        <p class="udemy-caption" style="color: var(--udemy-gray-600); margin-bottom: 32px; font-style: italic;">
+          Official Udemy format • Professional questions • Ready to publish instantly
+        </p>
+        <a href="/register" class="udemy-btn udemy-btn-primary udemy-btn-lg" style="text-decoration: none; font-size: 1.125rem;">
+          🚀 Unlock My Revenue Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section style="background-color: var(--udemy-white); padding: 80px 0;">
+    <div class="udemy-container">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <h2 class="udemy-h2" style="margin-bottom: 16px;">
+          Built Specifically for <span style="color: var(--udemy-purple);">Udemy Instructors</span>
+        </h2>
+        <p class="udemy-body" style="font-size: 1.125rem; color: var(--udemy-gray-600);">
+          Everything you need to create professional practice tests, nothing you don't.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+        <!-- Feature 1 -->
+        <div class="udemy-card">
+          <div style="width: 48px; height: 48px; background-color: var(--udemy-purple-lightest); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+            <svg width="24" height="24" fill="var(--udemy-purple)" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            </svg>
+          </div>
+          <h3 class="udemy-h4" style="margin-bottom: 12px;">Course-Specific Questions</h3>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            AI generates questions based on YOUR learning objectives, not generic templates. Every question aligns with what you actually teach.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="udemy-card">
+          <div style="width: 48px; height: 48px; background-color: var(--udemy-purple-lightest); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+            <svg width="24" height="24" fill="var(--udemy-purple)" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <h3 class="udemy-h4" style="margin-bottom: 12px;">All Question Types</h3>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            Multiple choice, multiple select, true/false, and scenario-based questions. Mix and match to keep students engaged.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="udemy-card">
+          <div style="width: 48px; height: 48px; background-color: var(--udemy-purple-lightest); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+            <svg width="24" height="24" fill="var(--udemy-purple)" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <h3 class="udemy-h4" style="margin-bottom: 12px;">Perfect CSV Every Time</h3>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            Export in Udemy's exact bulk import format. No formatting errors, no manual editing. Upload and done.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="udemy-card">
+          <div style="width: 48px; height: 48px; background-color: var(--udemy-purple-lightest); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+            <svg width="24" height="24" fill="var(--udemy-purple)" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <h3 class="udemy-h4" style="margin-bottom: 12px;">Smart Difficulty Levels</h3>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            Choose beginner, intermediate, advanced, or mixed. AI adjusts question complexity and explanation depth automatically.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="udemy-card">
+          <div style="width: 48px; height: 48px; background-color: var(--udemy-purple-lightest); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+            <svg width="24" height="24" fill="var(--udemy-purple)" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <h3 class="udemy-h4" style="margin-bottom: 12px;">Lightning Fast</h3>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            Generate 50 questions in under 60 seconds. What used to take all afternoon now takes less time than a coffee break.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="udemy-card">
+          <div style="width: 48px; height: 48px; background-color: var(--udemy-purple-lightest); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+            <svg width="24" height="24" fill="var(--udemy-purple)" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <h3 class="udemy-h4" style="margin-bottom: 12px;">6 Explanation Styles</h3>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            From beginner-friendly to academic. Choose the tone that matches your teaching style and student level.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" style="background-color: var(--udemy-gray-100); padding: 80px 0;">
+    <div class="udemy-container">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <h2 class="udemy-h2" style="margin-bottom: 16px;">
+          From Idea to Uploaded Test in <span style="color: var(--udemy-purple);">3 Simple Steps</span>
+        </h2>
+        <p class="udemy-body" style="font-size: 1.125rem; color: var(--udemy-gray-600);">
+          So easy, you'll wonder how you ever did it manually.
+        </p>
+      </div>
+
+      <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px;">
+        <!-- Step 1 -->
+        <div class="udemy-card-elevated">
+          <div style="display: flex; gap: 24px; align-items: flex-start;">
+            <div style="flex-shrink: 0; width: 56px; height: 56px; background: linear-gradient(135deg, var(--udemy-purple) 0%, var(--udemy-purple-dark) 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 700;">
+              1
+            </div>
+            <div style="flex: 1;">
+              <h3 class="udemy-h3" style="margin-bottom: 12px;">Fill Out Your Course Details</h3>
+              <p class="udemy-body" style="color: var(--udemy-gray-600); margin-bottom: 16px;">
+                Enter your course title, category, and learning objectives. The more specific you are, the better the AI can generate relevant questions.
+              </p>
+              <div style="background-color: var(--udemy-gray-100); border-radius: 4px; padding: 16px;">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                  <div style="display: flex; align-items: start; gap: 12px;">
+                    <span style="color: var(--udemy-purple); font-size: 1.25rem;">✓</span>
+                    <div>
+                      <p class="udemy-body-sm" style="font-weight: 600;">Course title</p>
+                      <p class="udemy-caption">e.g., "Complete Python Programming for Beginners"</p>
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: start; gap: 12px;">
+                    <span style="color: var(--udemy-purple); font-size: 1.25rem;">✓</span>
+                    <div>
+                      <p class="udemy-body-sm" style="font-weight: 600;">4+ Learning objectives</p>
+                      <p class="udemy-caption">What will students actually learn?</p>
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: start; gap: 12px;">
+                    <span style="color: var(--udemy-purple); font-size: 1.25rem;">✓</span>
+                    <div>
+                      <p class="udemy-body-sm" style="font-weight: 600;">Difficulty & style preferences</p>
+                      <p class="udemy-caption">Choose beginner to advanced, pick explanation tone</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="udemy-card-elevated">
+          <div style="display: flex; gap: 24px; align-items: flex-start;">
+            <div style="flex-shrink: 0; width: 56px; height: 56px; background: linear-gradient(135deg, var(--udemy-purple) 0%, var(--udemy-purple-dark) 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 700;">
+              2
+            </div>
+            <div style="flex: 1;">
+              <h3 class="udemy-h3" style="margin-bottom: 12px;">Click Generate</h3>
+              <p class="udemy-body" style="color: var(--udemy-gray-600); margin-bottom: 16px;">
+                Our AI (powered by Claude) analyzes your course info and creates customized, high-quality practice questions. Takes 30-60 seconds depending on how many questions you want.
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <div style="background-color: var(--udemy-success-light); border-radius: 4px; padding: 16px;">
+                  <p class="udemy-overline" style="color: var(--udemy-success); margin-bottom: 8px;">What AI Does</p>
+                  <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                    <li class="udemy-body-sm" style="color: var(--udemy-gray-700);">→ Analyzes learning objectives</li>
+                    <li class="udemy-body-sm" style="color: var(--udemy-gray-700);">→ Creates varied questions</li>
+                    <li class="udemy-body-sm" style="color: var(--udemy-gray-700);">→ Matches difficulty level</li>
+                  </ul>
+                </div>
+                <div style="background-color: var(--udemy-purple-lightest); border-radius: 4px; padding: 16px;">
+                  <p class="udemy-overline" style="color: var(--udemy-purple); margin-bottom: 8px;">You Get</p>
+                  <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                    <li class="udemy-body-sm" style="color: var(--udemy-gray-700);">✓ Course-specific questions</li>
+                    <li class="udemy-body-sm" style="color: var(--udemy-gray-700);">✓ Clear explanations</li>
+                    <li class="udemy-body-sm" style="color: var(--udemy-gray-700);">✓ No duplicates or errors</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="udemy-card-elevated">
+          <div style="display: flex; gap: 24px; align-items: flex-start;">
+            <div style="flex-shrink: 0; width: 56px; height: 56px; background: linear-gradient(135deg, var(--udemy-purple) 0%, var(--udemy-purple-dark) 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 700;">
+              3
+            </div>
+            <div style="flex: 1;">
+              <h3 class="udemy-h3" style="margin-bottom: 12px;">Download & Upload to Udemy</h3>
+              <p class="udemy-body" style="color: var(--udemy-gray-600); margin-bottom: 16px;">
+                Download the perfectly formatted CSV file and upload it straight to Udemy using their bulk import feature. No editing, no formatting fixes. Just upload and you're done!
+              </p>
+              <div style="background-color: var(--udemy-gray-100); border-radius: 4px; padding: 16px;">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 32px; height: 32px; background-color: var(--udemy-success-light); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--udemy-success); font-weight: 700; flex-shrink: 0;">1</div>
+                    <div>
+                      <p class="udemy-body-sm" style="font-weight: 600;">Download CSV file</p>
+                      <p class="udemy-caption">Instant download, perfect Udemy format</p>
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 32px; height: 32px; background-color: var(--udemy-success-light); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--udemy-success); font-weight: 700; flex-shrink: 0;">2</div>
+                    <div>
+                      <p class="udemy-body-sm" style="font-weight: 600;">Go to Udemy Course → Practice Tests</p>
+                      <p class="udemy-caption">Click "Bulk Import"</p>
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 32px; height: 32px; background-color: var(--udemy-success-light); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--udemy-success); font-weight: 700; flex-shrink: 0;">3</div>
+                    <div>
+                      <p class="udemy-body-sm" style="font-weight: 600;">Upload CSV → Done!</p>
+                      <p class="udemy-caption">All questions imported perfectly</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top: 24px; text-align: center;">
+                <a href="/register" class="udemy-btn udemy-btn-primary udemy-btn-lg">
+                  Start Creating Tests Free →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- See It In Action Section -->
+  <section style="background-color: var(--udemy-white); padding: 80px 0;">
+    <div class="udemy-container">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <h2 class="udemy-h2" style="margin-bottom: 16px;">
+          See It In Action
+        </h2>
+        <p class="udemy-body" style="font-size: 1.125rem; color: var(--udemy-gray-600);">
+          Real examples showing what you input and what you get.
+        </p>
+      </div>
+
+      <!-- Course Examples Tabs -->
+      <div style="max-width: 1000px; margin: 0 auto;">
+        <!-- Course Selector Tabs -->
+        <div style="display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 2px solid var(--udemy-gray-300); overflow-x: auto;">
+          <button class="course-tab active" data-course="aws" style="padding: 12px 24px; background: none; border: none; border-bottom: 3px solid var(--udemy-purple); color: var(--udemy-purple); font-weight: 600; cursor: pointer; white-space: nowrap;">
+            AWS Course
+          </button>
+          <button class="course-tab" data-course="yoga" style="padding: 12px 24px; background: none; border: none; border-bottom: 3px solid transparent; color: var(--udemy-gray-600); font-weight: 600; cursor: pointer; white-space: nowrap;">
+            Yoga Course
+          </button>
+          <button class="course-tab" data-course="management" style="padding: 12px 24px; background: none; border: none; border-bottom: 3px solid transparent; color: var(--udemy-gray-600); font-weight: 600; cursor: pointer; white-space: nowrap;">
+            Management Course
+          </button>
+        </div>
+
+        <!-- Course Content Panels -->
+        <div id="course-panels">
+          <!-- AWS Course Panel -->
+          <div class="course-panel active" data-course="aws">
+            <!-- Input/Output Sub-tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+              <button class="subtab active" data-panel="aws-input" style="padding: 8px 16px; background-color: var(--udemy-purple); color: white; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+                Input Form
+              </button>
+              <button class="subtab" data-panel="aws-output" style="padding: 8px 16px; background-color: var(--udemy-gray-200); color: var(--udemy-gray-700); border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+                CSV Output
+              </button>
+            </div>
+
+            <!-- AWS Input Panel -->
+            <div id="aws-input" class="subpanel active" style="background-color: var(--udemy-gray-100); border-radius: 8px; padding: 32px;">
+              <div style="display: grid; gap: 20px;">
+                <div>
+                  <label class="udemy-label">Course Title</label>
+                  <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                    AWS Solutions Architect Associate - Complete Guide 2024
+                  </div>
+                </div>
+                <div>
+                  <label class="udemy-label">Category</label>
+                  <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                    IT & Software
+                  </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;">
+                  <div>
+                    <label class="udemy-label">Difficulty</label>
+                    <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                      Intermediate
+                    </div>
+                  </div>
+                  <div>
+                    <label class="udemy-label">Questions</label>
+                    <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                      25
+                    </div>
+                  </div>
+                  <div>
+                    <label class="udemy-label">Type</label>
+                    <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                      Multiple Choice
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label class="udemy-label">Explanation Style</label>
+                  <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                    Professional
+                  </div>
+                </div>
+                <div>
+                  <label class="udemy-label">Learning Objectives (4)</label>
+                  <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 16px;">
+                    <ul style="margin: 0; padding-left: 20px; color: var(--udemy-gray-700);">
+                      <li style="margin-bottom: 8px;">Design highly available and scalable AWS architectures</li>
+                      <li style="margin-bottom: 8px;">Implement secure access control with IAM</li>
+                      <li style="margin-bottom: 8px;">Configure VPC networking and subnets</li>
+                      <li>Manage data storage with S3 and EBS</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AWS Output Panel -->
+            <div id="aws-output" class="subpanel" style="display: none;">
+              <div class="udemy-card" style="overflow-x: auto;">
+                <p class="udemy-body-sm" style="margin-bottom: 16px; padding: 12px; background-color: var(--udemy-purple-lightest); border-radius: 4px;">
+                  <strong>Preview of CSV Output</strong> (Actual CSV includes: Question, Question Type, Answer Option 1-6, Explanation 1-6, Correct Answers, Overall Explanation, Domain)
+                </p>
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+                  <thead>
+                    <tr style="background-color: var(--udemy-gray-100);">
+                      <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--udemy-gray-300); font-weight: 600;">Question</th>
+                      <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--udemy-gray-300); font-weight: 600;">Question Type</th>
+                      <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--udemy-gray-300); font-weight: 600;">Correct Answers</th>
+                      <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--udemy-gray-300); font-weight: 600;">Overall Explanation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">What is the minimum number of Availability Zones required to achieve high availability in AWS?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">2</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">High availability in AWS requires at least 2 Availability Zones...</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">Which AWS service provides object storage with 99.999999999% durability?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">3</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">Amazon S3 provides 11 nines of durability through redundant storage...</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">What is the purpose of an Internet Gateway in a VPC?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">2</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">An Internet Gateway allows resources in your VPC to communicate with the internet...</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">Which IAM best practice should you follow for the root account?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">3</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">The root account should be secured with MFA and used only for initial setup...</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">What type of load balancer operates at Layer 7 of the OSI model?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">2</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">Application Load Balancer operates at the application layer (Layer 7)...</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div style="margin-top: 24px; text-align: center;">
+                  <a href="/static/files/udemy_template.csv" download="udemy_template.csv" class="udemy-btn udemy-btn-primary udemy-btn-md" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                    Download Sample CSV
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Yoga Course Panel -->
+          <div class="course-panel" data-course="yoga" style="display: none;">
+            <!-- Input/Output Sub-tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+              <button class="subtab active" data-panel="yoga-input" style="padding: 8px 16px; background-color: var(--udemy-purple); color: white; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+                Input Form
+              </button>
+              <button class="subtab" data-panel="yoga-output" style="padding: 8px 16px; background-color: var(--udemy-gray-200); color: var(--udemy-gray-700); border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+                CSV Output
+              </button>
+            </div>
+
+            <!-- Yoga Input Panel -->
+            <div id="yoga-input" class="subpanel active" style="background-color: var(--udemy-gray-100); border-radius: 8px; padding: 32px;">
+              <div style="display: grid; gap: 20px;">
+                <div>
+                  <label class="udemy-label">Course Title</label>
+                  <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                    Beginner Yoga Fundamentals - Start Your Practice Today
+                  </div>
+                </div>
+                <div>
+                  <label class="udemy-label">Category</label>
+                  <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                    Health & Fitness
+                  </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;">
+                  <div>
+                    <label class="udemy-label">Difficulty</label>
+                    <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                      Beginner
+                    </div>
+                  </div>
+                  <div>
+                    <label class="udemy-label">Questions</label>
+                    <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                      15
+                    </div>
+                  </div>
+                  <div>
+                    <label class="udemy-label">Type</label>
+                    <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                      Multiple Choice
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label class="udemy-label">Explanation Style</label>
+                  <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                    Beginner-Friendly
+                  </div>
+                </div>
+                <div>
+                  <label class="udemy-label">Learning Objectives (4)</label>
+                  <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 16px;">
+                    <ul style="margin: 0; padding-left: 20px; color: var(--udemy-gray-700);">
+                      <li style="margin-bottom: 8px;">Practice basic yoga poses safely and correctly</li>
+                      <li style="margin-bottom: 8px;">Learn proper breathing techniques for relaxation</li>
+                      <li style="margin-bottom: 8px;">Understand yoga philosophy and mindfulness</li>
+                      <li>Build flexibility and strength gradually</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Yoga Output Panel -->
+            <div id="yoga-output" class="subpanel" style="display: none;">
+              <div class="udemy-card" style="overflow-x: auto;">
+                <p class="udemy-body-sm" style="margin-bottom: 16px; padding: 12px; background-color: var(--udemy-purple-lightest); border-radius: 4px;">
+                  <strong>Preview of CSV Output</strong> (Actual CSV includes: Question, Question Type, Answer Option 1-6, Explanation 1-6, Correct Answers, Overall Explanation, Domain)
+                </p>
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+                  <thead>
+                    <tr style="background-color: var(--udemy-gray-100);">
+                      <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--udemy-gray-300); font-weight: 600;">Question</th>
+                      <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--udemy-gray-300); font-weight: 600;">Question Type</th>
+                      <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--udemy-gray-300); font-weight: 600;">Correct Answers</th>
+                      <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--udemy-gray-300); font-weight: 600;">Overall Explanation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">What is the most important principle when starting yoga?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">2</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">In yoga, it's crucial to respect your body's limits and never push into pain...</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">Which breathing technique is commonly used in yoga?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">3</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">Deep breathing using your diaphragm helps you relax and oxygenate your body...</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">What does "Namaste" mean when said at the end of a yoga class?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">2</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">Namaste is a respectful greeting that acknowledges the divine spark in each person...</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">How should a beginner approach challenging poses?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">2</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">Using modifications, props like blocks and straps, helps you practice safely...</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">What is the purpose of Savasana (Corpse Pose) at the end of class?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">2</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">Savasana allows your body and mind to integrate the benefits of your practice...</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div style="margin-top: 24px; text-align: center;">
+                  <a href="/static/files/udemy_template.csv" download="udemy_template.csv" class="udemy-btn udemy-btn-primary udemy-btn-md" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                    Download Sample CSV
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Management Course Panel -->
+          <div class="course-panel" data-course="management" style="display: none;">
+            <!-- Input/Output Sub-tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+              <button class="subtab active" data-panel="management-input" style="padding: 8px 16px; background-color: var(--udemy-purple); color: white; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+                Input Form
+              </button>
+              <button class="subtab" data-panel="management-output" style="padding: 8px 16px; background-color: var(--udemy-gray-200); color: var(--udemy-gray-700); border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+                CSV Output
+              </button>
+            </div>
+
+            <!-- Management Input Panel -->
+            <div id="management-input" class="subpanel active" style="background-color: var(--udemy-gray-100); border-radius: 8px; padding: 32px;">
+              <div style="display: grid; gap: 20px;">
+                <div>
+                  <label class="udemy-label">Course Title</label>
+                  <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                    Project Management Essentials for Business Success
+                  </div>
+                </div>
+                <div>
+                  <label class="udemy-label">Category</label>
+                  <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                    Business
+                  </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;">
+                  <div>
+                    <label class="udemy-label">Difficulty</label>
+                    <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                      Intermediate
+                    </div>
+                  </div>
+                  <div>
+                    <label class="udemy-label">Questions</label>
+                    <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                      20
+                    </div>
+                  </div>
+                  <div>
+                    <label class="udemy-label">Type</label>
+                    <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                      Multiple Choice
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label class="udemy-label">Explanation Style</label>
+                  <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 12px; color: var(--udemy-gray-700);">
+                    Professional
+                  </div>
+                </div>
+                <div>
+                  <label class="udemy-label">Learning Objectives (4)</label>
+                  <div style="background-color: white; border: 1px solid var(--udemy-gray-400); border-radius: 4px; padding: 16px;">
+                    <ul style="margin: 0; padding-left: 20px; color: var(--udemy-gray-700);">
+                      <li style="margin-bottom: 8px;">Apply project management methodologies effectively</li>
+                      <li style="margin-bottom: 8px;">Create project plans with realistic timelines</li>
+                      <li style="margin-bottom: 8px;">Manage stakeholder expectations and communication</li>
+                      <li>Use risk management techniques</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Management Output Panel -->
+            <div id="management-output" class="subpanel" style="display: none;">
+              <div class="udemy-card" style="overflow-x: auto;">
+                <p class="udemy-body-sm" style="margin-bottom: 16px; padding: 12px; background-color: var(--udemy-purple-lightest); border-radius: 4px;">
+                  <strong>Preview of CSV Output</strong> (Actual CSV includes: Question, Question Type, Answer Option 1-6, Explanation 1-6, Correct Answers, Overall Explanation, Domain)
+                </p>
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+                  <thead>
+                    <tr style="background-color: var(--udemy-gray-100);">
+                      <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--udemy-gray-300); font-weight: 600;">Question</th>
+                      <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--udemy-gray-300); font-weight: 600;">Question Type</th>
+                      <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--udemy-gray-300); font-weight: 600;">Correct Answers</th>
+                      <th style="padding: 12px; text-align: left; border-bottom: 2px solid var(--udemy-gray-300); font-weight: 600;">Overall Explanation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">What is the critical path in project management?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">2</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">The critical path is the longest sequence of tasks that determines the minimum duration...</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">Which methodology emphasizes iterative development and flexibility?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">2</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">Agile methodology uses iterative cycles (sprints) and adapts to changing requirements...</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">What is a RACI matrix used for?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">2</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">RACI (Responsible, Accountable, Consulted, Informed) clarifies who does what...</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">What should you do when a project risk becomes an issue?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">3</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">When identified risks materialize, you should implement your pre-planned mitigation strategies...</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">What is scope creep?</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">multiple-choice</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">2</td>
+                      <td style="padding: 12px; border-bottom: 1px solid var(--udemy-gray-300);">Scope creep occurs when project requirements grow without proper approval...</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div style="margin-top: 24px; text-align: center;">
+                  <a href="/static/files/udemy_template.csv" download="udemy_template.csv" class="udemy-btn udemy-btn-primary udemy-btn-md" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                    Download Sample CSV
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section style="background-color: var(--udemy-white); padding: 80px 0;">
+    <div class="udemy-container">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <h2 class="udemy-h2" style="margin-bottom: 16px;">
+          Perfect for <span style="color: var(--udemy-purple);">Every Type of Instructor</span>
+        </h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+        <!-- Use Case 1 -->
+        <div class="udemy-card" style="text-align: center;">
+          <div style="font-size: 4rem; margin-bottom: 16px;">👨‍💻</div>
+          <h3 class="udemy-h4" style="margin-bottom: 12px;">Tech & IT Courses</h3>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600); margin-bottom: 16px;">
+            Programming, cloud computing, cybersecurity, data science. Generate coding questions, scenarios, and debugging challenges instantly.
+          </p>
+          <div style="background-color: var(--udemy-gray-100); border-radius: 4px; padding: 12px;">
+            <p class="udemy-caption" style="font-style: italic;">
+              "Saved me 4+ hours per course. Questions are actually relevant to my curriculum!"
+            </p>
+          </div>
+        </div>
+
+        <!-- Use Case 2 -->
+        <div class="udemy-card" style="text-align: center;">
+          <div style="font-size: 4rem; margin-bottom: 16px;">💼</div>
+          <h3 class="udemy-h4" style="margin-bottom: 12px;">Business & Marketing</h3>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600); margin-bottom: 16px;">
+            MBA topics, digital marketing, entrepreneurship, project management. Create case studies and application-based questions.
+          </p>
+          <div style="background-color: var(--udemy-gray-100); border-radius: 4px; padding: 12px;">
+            <p class="udemy-caption" style="font-style: italic;">
+              "The scenario-based questions are perfect for testing real-world business knowledge."
+            </p>
+          </div>
+        </div>
+
+        <!-- Use Case 3 -->
+        <div class="udemy-card" style="text-align: center;">
+          <div style="font-size: 4rem; margin-bottom: 16px;">🎨</div>
+          <h3 class="udemy-h4" style="margin-bottom: 12px;">Creative & Lifestyle</h3>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600); margin-bottom: 16px;">
+            Design, photography, music, health & fitness, cooking. Generate questions that test both theory and practical application.
+          </p>
+          <div style="background-color: var(--udemy-gray-100); border-radius: 4px; padding: 12px;">
+            <p class="udemy-caption" style="font-style: italic;">
+              "Finally, practice tests that match my creative teaching style!"
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section style="background: linear-gradient(135deg, var(--udemy-purple) 0%, var(--udemy-purple-dark) 100%); padding: 80px 0;">
+    <div class="udemy-container">
+      <div style="max-width: 750px; margin: 0 auto; text-align: center;">
+        <div style="font-size: 4rem; margin-bottom: 16px;">💰🚀</div>
+        <h2 class="udemy-h2" style="font-size: 2.5rem; margin-bottom: 16px; color: white;">
+          Every Day Delayed = Revenue Lost
+        </h2>
+        <p class="udemy-body" style="font-size: 1.25rem; color: rgba(255,255,255,0.9); margin-bottom: 12px;">
+          Your course is ready. Your knowledge has value.<br>
+          <strong style="color: white;">Don't let tests prevent you from earning money.</strong>
+        </p>
+        <p class="udemy-body-sm" style="color: rgba(255,255,255,0.8); margin-bottom: 40px; font-style: italic;">
+          While you hesitate, other instructors generate their tests in 60 seconds and publish their courses.
+        </p>
+
+        <div style="margin-bottom: 32px;">
+          <a href="/register" class="udemy-btn udemy-btn-lg" style="min-width: 300px; text-decoration: none; background-color: white; color: var(--udemy-purple); font-size: 1.25rem; font-weight: 700; padding: 16px 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+            🎯 Launch My Course Today
+          </a>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; font-size: 0.9rem; color: rgba(255,255,255,0.9);">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>20 Free Questions</strong></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>No Credit Card</strong></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong>Publish in 60 Seconds</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background-color: var(--udemy-gray-900); padding: 48px 0; color: white;">
+    <div class="udemy-container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; margin-bottom: 32px;">
+        <!-- Brand -->
+        <div>
+          <div style="font-size: 1.5rem; font-weight: 700; color: var(--udemy-purple); margin-bottom: 16px;">
+            PracticeTestBulk
+          </div>
+          <p style="color: var(--udemy-gray-400); font-size: 0.875rem; line-height: 1.5;">
+            Generate professional Udemy practice tests in minutes, not hours. Built for instructors, powered by AI.
+          </p>
+        </div>
+
+        <!-- Product -->
+        <div>
+          <h4 style="color: white; font-size: 0.875rem; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em;">Product</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+            <li><a href="#how-it-works" style="color: var(--udemy-gray-400); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;" onmouseover="this.style.color='var(--udemy-purple)'" onmouseout="this.style.color='var(--udemy-gray-400)'">How It Works</a></li>
+            <li><a href="/pro" style="color: var(--udemy-gray-400); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;" onmouseover="this.style.color='var(--udemy-purple)'" onmouseout="this.style.color='var(--udemy-gray-400)'">Pricing</a></li>
+            <li><a href="/app" style="color: var(--udemy-gray-400); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;" onmouseover="this.style.color='var(--udemy-purple)'" onmouseout="this.style.color='var(--udemy-gray-400)'">Try Demo</a></li>
+            <li><a href="/docs" style="color: var(--udemy-gray-400); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;" onmouseover="this.style.color='var(--udemy-purple)'" onmouseout="this.style.color='var(--udemy-gray-400)'">API Docs</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h4 style="color: white; font-size: 0.875rem; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em;">Company</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+            <li><a href="/about" style="color: var(--udemy-gray-400); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;" onmouseover="this.style.color='var(--udemy-purple)'" onmouseout="this.style.color='var(--udemy-gray-400)'">About</a></li>
+            <li><a href="/contact" style="color: var(--udemy-gray-400); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;" onmouseover="this.style.color='var(--udemy-purple)'" onmouseout="this.style.color='var(--udemy-gray-400)'">Contact</a></li>
+            <li><a href="/privacy" style="color: var(--udemy-gray-400); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;" onmouseover="this.style.color='var(--udemy-purple)'" onmouseout="this.style.color='var(--udemy-gray-400)'">Privacy</a></li>
+            <li><a href="/terms" style="color: var(--udemy-gray-400); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;" onmouseover="this.style.color='var(--udemy-purple)'" onmouseout="this.style.color='var(--udemy-gray-400)'">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <hr style="border: none; height: 1px; background-color: var(--udemy-gray-700); margin: 32px 0;">
+
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+        <p style="color: var(--udemy-gray-500); font-size: 0.875rem; margin: 0;">
+          © 2024 PracticeTestBulk. All rights reserved.
+        </p>
+        <p style="color: var(--udemy-gray-500); font-size: 0.875rem; margin: 0;">
+          Powered by DeepSeek AI
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Utilities -->
+  <script src="/static/js/utils/auth.js"></script>
+
+  <!-- Page Script -->
+  <script src="/static/js/pages/landing.js"></script>
+
+</body>
+</html>

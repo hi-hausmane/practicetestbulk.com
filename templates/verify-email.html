@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verify Your Email - PracticeTestBulk</title>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Udemy Theme CSS -->
+  <link rel="stylesheet" href="/static/css/udemy-theme.css">
+
+  <style>
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .pulse-slow {
+      animation: pulse-slow 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body style="background-color: var(--udemy-gray-100); min-height: 100vh;">
+
+  <!-- Navigation -->
+  <nav class="udemy-nav" style="position: sticky; top: 0; z-index: 100;">
+    <div class="udemy-container" style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="/" style="font-size: 1.5rem; font-weight: 700; color: var(--udemy-purple); text-decoration: none;">
+        PracticeTestBulk
+      </a>
+      <a href="/login?verified=true" class="udemy-btn udemy-btn-primary udemy-btn-md">
+        Sign In
+      </a>
+    </div>
+  </nav>
+
+  <!-- Verification Pending Message -->
+  <div style="min-height: calc(100vh - 73px); display: flex; align-items: center; justify-content: center; padding: 40px 16px;">
+    <div style="max-width: 580px; width: 100%;">
+      <!-- Card -->
+      <div class="udemy-card-elevated" style="padding: 48px; text-align: center;">
+
+        <!-- Icon -->
+        <div style="margin-bottom: 24px; display: flex; justify-content: center;">
+          <div style="width: 80px; height: 80px; background-color: var(--udemy-purple-lightest); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <svg class="pulse-slow" width="40" height="40" fill="var(--udemy-purple)" viewBox="0 0 20 20">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Heading -->
+        <h1 class="udemy-h2" style="margin-bottom: 12px;">Check Your Email</h1>
+        <p class="udemy-body" style="color: var(--udemy-gray-600); font-size: 1.125rem; margin-bottom: 32px;">
+          We've sent a verification link to <span id="user-email" style="color: var(--udemy-gray-900); font-weight: 600;"></span>
+        </p>
+
+        <!-- Instructions -->
+        <div style="background-color: var(--udemy-gray-100); border: 1px solid var(--udemy-gray-400); border-radius: 8px; padding: 24px; margin-bottom: 32px; text-align: left;">
+          <h2 class="udemy-h4" style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <svg width="20" height="20" fill="var(--udemy-purple)" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+            </svg>
+            What to do next:
+          </h2>
+          <ol style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+            <li style="display: flex; align-items: start; gap: 12px;">
+              <span class="udemy-badge udemy-badge-purple" style="padding: 4px 12px;">1</span>
+              <span class="udemy-body-sm">Open your email inbox</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: 12px;">
+              <span class="udemy-badge udemy-badge-purple" style="padding: 4px 12px;">2</span>
+              <span class="udemy-body-sm">Click the verification link we sent you</span>
+            </li>
+            <li style="display: flex; align-items: start; gap: 12px;">
+              <span class="udemy-badge udemy-badge-purple" style="padding: 4px 12px;">3</span>
+              <span class="udemy-body-sm">You'll be redirected back here and can start using the app with <strong>20 free questions</strong></span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Didn't receive email? -->
+        <div style="margin-bottom: 32px;">
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600); margin-bottom: 16px;">Didn't receive the email?</p>
+          <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+            <button
+              onclick="resendVerificationEmail(event)"
+              class="udemy-btn udemy-btn-secondary udemy-btn-md"
+              style="min-width: 200px;"
+            >
+              Resend Email
+            </button>
+            <a
+              href="/register"
+              class="udemy-btn udemy-btn-outline udemy-btn-md"
+              style="min-width: 200px; text-decoration: none;"
+            >
+              Try Different Email
+            </a>
+          </div>
+          <p class="udemy-caption" style="margin-top: 16px; color: var(--udemy-gray-500);">
+            Check your spam folder if you don't see it in your inbox
+          </p>
+        </div>
+
+        <!-- Back to Login -->
+        <div style="padding-top: 24px; border-top: 1px solid var(--udemy-gray-400);">
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            Already verified?
+            <a href="/login?verified=true" style="color: var(--udemy-purple); font-weight: 600; text-decoration: none;">
+              Sign in here
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/pages/verify-email.js"></script>
+</body>
+</html>

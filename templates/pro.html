@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing Plans - PracticeTestBulk</title>
+  <meta name="description" content="Choose the perfect plan for your course creation needs. From free to unlimited, we have a plan that fits your workflow.">
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Udemy Theme CSS -->
+  <link rel="stylesheet" href="/static/css/udemy-theme.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="udemy-nav" style="position: sticky; top: 0; z-index: 100;">
+    <div class="udemy-container" style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="/" style="font-size: 1.5rem; font-weight: 700; color: var(--udemy-purple); text-decoration: none;">
+        PracticeTestBulk
+      </a>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <a href="/" class="udemy-nav-link">Home</a>
+        <a href="/login" class="udemy-nav-link">Login</a>
+        <a href="/register" class="udemy-btn udemy-btn-primary udemy-btn-md">
+          Sign Up Free
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section style="background-color: var(--udemy-white); padding: 64px 0 40px;">
+    <div class="udemy-container">
+      <div style="max-width: 700px; margin: 0 auto; text-align: center;">
+        <span class="udemy-badge udemy-badge-purple" style="margin-bottom: 24px;">Simple, Transparent Pricing</span>
+
+        <h1 class="udemy-h1" style="font-size: 3rem; margin-bottom: 16px;">
+          Choose Your Plan
+        </h1>
+
+        <p class="udemy-body" style="font-size: 1.25rem; color: var(--udemy-gray-600); margin-bottom: 32px;">
+          Start free, upgrade when you need more. No hidden fees, no surprises.
+        </p>
+
+        <!-- Billing Toggle -->
+        <div style="display: inline-flex; align-items: center; gap: 16px; background-color: var(--udemy-gray-100); padding: 8px; border-radius: 8px;">
+          <button id="monthlyBtn" class="billing-toggle active" onclick="toggleBilling('monthly')" style="padding: 12px 24px; border: none; background-color: var(--udemy-white); color: var(--udemy-gray-900); font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s; box-shadow: var(--udemy-shadow-sm);">
+            Monthly
+          </button>
+          <button id="annualBtn" class="billing-toggle" onclick="toggleBilling('annual')" style="padding: 12px 24px; border: none; background-color: transparent; color: var(--udemy-gray-600); font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s;">
+            Annual
+            <span class="udemy-badge udemy-badge-success" style="margin-left: 8px; font-size: 0.75rem;">Save 17%</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Cards -->
+  <section style="background-color: var(--udemy-gray-100); padding: 64px 0;">
+    <div class="udemy-container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto;">
+
+        <!-- FREE Tier -->
+        <div class="udemy-card" style="position: relative; display: flex; flex-direction: column;">
+          <div style="margin-bottom: 24px;">
+            <h3 class="udemy-h3" style="margin-bottom: 8px;">Free</h3>
+            <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">Perfect for trying out TestGenius</p>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <div style="display: flex; align-items: baseline; gap: 8px;">
+              <span class="udemy-h1" style="font-size: 3rem;">$0</span>
+              <span class="udemy-body" style="color: var(--udemy-gray-600);">/month</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 32px;">
+            <a href="/register" class="udemy-btn udemy-btn-outline udemy-btn-lg" style="width: 100%; text-decoration: none;">
+              Get Started
+            </a>
+          </div>
+
+          <div style="flex: 1;">
+            <p class="udemy-overline" style="margin-bottom: 16px; color: var(--udemy-gray-600);">What's Included:</p>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm"><strong>20 questions</strong> per month</span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">Test the <strong>AI quality</strong></span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">All question formats</span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">All explanation styles</span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">Udemy CSV export</span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">Email support (48h response)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- PRO Tier -->
+        <div class="udemy-card-elevated" style="position: relative; display: flex; flex-direction: column; border: 2px solid var(--udemy-purple); box-shadow: 0 8px 24px rgba(164, 53, 240, 0.15);">
+          <div style="position: absolute; top: -16px; left: 50%; transform: translateX(-50%);">
+            <span class="udemy-badge udemy-badge-purple" style="padding: 8px 24px; font-size: 0.875rem; font-weight: 700; box-shadow: var(--udemy-shadow-sm);">MOST POPULAR</span>
+          </div>
+
+          <div style="margin-bottom: 24px; margin-top: 16px;">
+            <h3 class="udemy-h3" style="margin-bottom: 8px; color: var(--udemy-purple);">Pro</h3>
+            <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">For active course creators</p>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <div style="display: flex; align-items: baseline; gap: 8px;">
+              <span class="udemy-h1 monthly-price" style="font-size: 3rem;">$9</span>
+              <span class="udemy-h1 annual-price" style="font-size: 3rem; display: none;">$7.50</span>
+              <span class="udemy-body" style="color: var(--udemy-gray-600);">/month</span>
+            </div>
+            <p class="udemy-caption annual-price" style="color: var(--udemy-success); margin-top: 4px; display: none;">
+              Billed $90/year (save $18)
+            </p>
+          </div>
+
+          <div style="margin-bottom: 32px;">
+            <button onclick="upgradeToPro()" class="udemy-btn udemy-btn-primary udemy-btn-lg" style="width: 100%;">
+              Start Pro Trial
+            </button>
+          </div>
+
+          <div style="flex: 1;">
+            <p class="udemy-overline" style="margin-bottom: 16px; color: var(--udemy-purple);">Everything in Free, plus:</p>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-purple)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm"><strong>2,500 questions</strong> per month</span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-purple)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">Create <strong>3-5 complete courses</strong></span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-purple)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">Unlimited test downloads</span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-purple)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">Up to 250 questions per test</span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-purple)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">Email support (24h response)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- BUSINESS Tier -->
+        <div class="udemy-card" style="position: relative; display: flex; flex-direction: column;">
+          <div style="margin-bottom: 24px;">
+            <h3 class="udemy-h3" style="margin-bottom: 8px;">Business</h3>
+            <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">For teams and power users</p>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <div style="display: flex; align-items: baseline; gap: 8px;">
+              <span class="udemy-h1 monthly-price" style="font-size: 3rem;">$19</span>
+              <span class="udemy-h1 annual-price" style="font-size: 3rem; display: none;">$15.83</span>
+              <span class="udemy-body" style="color: var(--udemy-gray-600);">/month</span>
+            </div>
+            <p class="udemy-caption annual-price" style="color: var(--udemy-success); margin-top: 4px; display: none;">
+              Billed $190/year (save $38)
+            </p>
+          </div>
+
+          <div style="margin-bottom: 32px;">
+            <button onclick="upgradeToBusiness()" class="udemy-btn udemy-btn-secondary udemy-btn-lg" style="width: 100%;">
+              Start Business Trial
+            </button>
+          </div>
+
+          <div style="flex: 1;">
+            <p class="udemy-overline" style="margin-bottom: 16px; color: var(--udemy-gray-600);">Everything in Pro, plus:</p>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm"><strong>7,500 questions</strong> per month</span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">Create <strong>10-15 courses</strong> per month</span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm"><strong>Priority generation</strong> (faster)</span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">Perfect for agencies & teams</span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">Bulk test creation</span>
+              </li>
+              <li style="display: flex; align-items: start; gap: 12px;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 2px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="udemy-body-sm">Priority email support</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section style="background-color: var(--udemy-white); padding: 80px 0;">
+    <div class="udemy-container">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <h2 class="udemy-h2" style="margin-bottom: 16px;">
+          Compare All Features
+        </h2>
+        <p class="udemy-body" style="color: var(--udemy-gray-600);">
+          See exactly what's included in each plan
+        </p>
+      </div>
+
+      <div style="max-width: 1000px; margin: 0 auto; overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; background-color: var(--udemy-white);">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--udemy-gray-400);">
+              <th style="padding: 16px; text-align: left;">
+                <span class="udemy-body" style="font-weight: 700;">Feature</span>
+              </th>
+              <th style="padding: 16px; text-align: center;">
+                <span class="udemy-body" style="font-weight: 700;">Free</span>
+              </th>
+              <th style="padding: 16px; text-align: center; background-color: var(--udemy-purple-lightest);">
+                <span class="udemy-body" style="font-weight: 700; color: var(--udemy-purple);">Pro</span>
+              </th>
+              <th style="padding: 16px; text-align: center;">
+                <span class="udemy-body" style="font-weight: 700;">Business</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--udemy-gray-300);">
+              <td style="padding: 16px;">
+                <span class="udemy-body-sm">Questions per month</span>
+              </td>
+              <td style="padding: 16px; text-align: center;">
+                <span class="udemy-body-sm">20</span>
+              </td>
+              <td style="padding: 16px; text-align: center; background-color: var(--udemy-purple-lightest);">
+                <span class="udemy-body-sm" style="font-weight: 600;">2,500</span>
+              </td>
+              <td style="padding: 16px; text-align: center;">
+                <span class="udemy-body-sm" style="font-weight: 600;">7,500</span>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--udemy-gray-300);">
+              <td style="padding: 16px;">
+                <span class="udemy-body-sm">Courses you can create</span>
+              </td>
+              <td style="padding: 16px; text-align: center;">
+                <span class="udemy-body-sm">Test only</span>
+              </td>
+              <td style="padding: 16px; text-align: center; background-color: var(--udemy-purple-lightest);">
+                <span class="udemy-body-sm" style="font-weight: 600;">3-5 courses</span>
+              </td>
+              <td style="padding: 16px; text-align: center;">
+                <span class="udemy-body-sm" style="font-weight: 600;">10-15 courses</span>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--udemy-gray-300);">
+              <td style="padding: 16px;">
+                <span class="udemy-body-sm">All question formats</span>
+              </td>
+              <td style="padding: 16px; text-align: center;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="margin: 0 auto; display: block;"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              </td>
+              <td style="padding: 16px; text-align: center; background-color: var(--udemy-purple-lightest);">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="margin: 0 auto; display: block;"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              </td>
+              <td style="padding: 16px; text-align: center;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="margin: 0 auto; display: block;"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--udemy-gray-300);">
+              <td style="padding: 16px;">
+                <span class="udemy-body-sm">Priority generation</span>
+              </td>
+              <td style="padding: 16px; text-align: center;">
+                <span style="color: var(--udemy-gray-400);">—</span>
+              </td>
+              <td style="padding: 16px; text-align: center; background-color: var(--udemy-purple-lightest);">
+                <svg width="20" height="20" fill="var(--udemy-purple)" viewBox="0 0 20 20" style="margin: 0 auto; display: block;"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              </td>
+              <td style="padding: 16px; text-align: center;">
+                <svg width="20" height="20" fill="var(--udemy-success)" viewBox="0 0 20 20" style="margin: 0 auto; display: block;"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--udemy-gray-300);">
+              <td style="padding: 16px;">
+                <span class="udemy-body-sm">Max questions per test</span>
+              </td>
+              <td style="padding: 16px; text-align: center;">
+                <span class="udemy-body-sm">20</span>
+              </td>
+              <td style="padding: 16px; text-align: center; background-color: var(--udemy-purple-lightest);">
+                <span class="udemy-body-sm" style="font-weight: 600;">250</span>
+              </td>
+              <td style="padding: 16px; text-align: center;">
+                <span class="udemy-body-sm" style="font-weight: 600;">250</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 16px;">
+                <span class="udemy-body-sm">Email support</span>
+              </td>
+              <td style="padding: 16px; text-align: center;">
+                <span class="udemy-body-sm">Community</span>
+              </td>
+              <td style="padding: 16px; text-align: center; background-color: var(--udemy-purple-lightest);">
+                <span class="udemy-body-sm" style="font-weight: 600;">24h response</span>
+              </td>
+              <td style="padding: 16px; text-align: center;">
+                <span class="udemy-body-sm" style="font-weight: 600;">Priority</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section style="background-color: var(--udemy-gray-100); padding: 80px 0;">
+    <div class="udemy-container">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <h2 class="udemy-h2" style="margin-bottom: 16px;">
+          Frequently Asked Questions
+        </h2>
+      </div>
+
+      <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
+
+        <!-- FAQ 1 -->
+        <div class="udemy-card">
+          <h4 class="udemy-h4" style="margin-bottom: 12px;">Can I upgrade or downgrade my plan anytime?</h4>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            Yes! You can upgrade or downgrade at any time. When you upgrade, you'll be charged a prorated amount. When you downgrade, the change takes effect at the end of your current billing period.
+          </p>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="udemy-card">
+          <h4 class="udemy-h4" style="margin-bottom: 12px;">What happens if I exceed my question limit?</h4>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            If you reach your monthly question limit on the Free or Pro plan, you'll see a message prompting you to upgrade. You can also wait until the next month when your limit resets. No overage charges—you're always in control.
+          </p>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="udemy-card">
+          <h4 class="udemy-h4" style="margin-bottom: 12px;">Is there a free trial for Pro or Business?</h4>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            The Free plan serves as your trial! Start there to test the quality and features. When you're ready for more generations or advanced features, upgrade to Pro or Business with confidence.
+          </p>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="udemy-card">
+          <h4 class="udemy-h4" style="margin-bottom: 12px;">Do unused questions roll over to the next month?</h4>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            No, unused questions don't roll over. Your question limit resets on the first day of each billing period. This keeps pricing simple and predictable.
+          </p>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="udemy-card">
+          <h4 class="udemy-h4" style="margin-bottom: 12px;">Can I cancel my subscription?</h4>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            Absolutely. You can cancel anytime from your account settings. You'll retain access until the end of your current billing period, and you won't be charged again.
+          </p>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="udemy-card">
+          <h4 class="udemy-h4" style="margin-bottom: 12px;">What payment methods do you accept?</h4>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            We accept all major credit cards (Visa, Mastercard, American Express, Discover) via Stripe. Your payment information is securely processed and never stored on our servers.
+          </p>
+        </div>
+
+        <!-- FAQ 7 -->
+        <div class="udemy-card">
+          <h4 class="udemy-h4" style="margin-bottom: 12px;">Who owns the generated questions?</h4>
+          <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+            You do! All questions generated through PracticeTestBulk are 100% yours to use commercially. Upload them to Udemy, sell them, or use them however you like—no attribution required.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section style="background: linear-gradient(135deg, var(--udemy-purple-lightest) 0%, var(--udemy-white) 100%); padding: 80px 0;">
+    <div class="udemy-container">
+      <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <h2 class="udemy-h2" style="margin-bottom: 16px;">
+          Ready to Get Started?
+        </h2>
+        <p class="udemy-body" style="font-size: 1.125rem; color: var(--udemy-gray-600); margin-bottom: 32px;">
+          Join hundreds of instructors who are saving time and creating better tests with PracticeTestBulk.
+        </p>
+        <a href="/register" class="udemy-btn udemy-btn-primary udemy-btn-lg" style="min-width: 200px;">
+          Start Free Today
+        </a>
+        <p class="udemy-caption" style="margin-top: 16px; color: var(--udemy-gray-600);">
+          No credit card required • 20 free questions to test the quality
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background-color: var(--udemy-gray-900); padding: 48px 0; color: white;">
+    <div class="udemy-container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; margin-bottom: 32px;">
+        <div>
+          <div style="font-size: 1.5rem; font-weight: 700; color: var(--udemy-purple); margin-bottom: 16px;">
+            PracticeTestBulk
+          </div>
+          <p style="color: var(--udemy-gray-400); font-size: 0.875rem;">
+            Generate professional Udemy practice tests in minutes, not hours.
+          </p>
+        </div>
+        <div>
+          <h4 style="color: white; font-size: 0.875rem; font-weight: 700; margin-bottom: 16px; text-transform: uppercase;">Product</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+            <li><a href="/" style="color: var(--udemy-gray-400); text-decoration: none; font-size: 0.875rem;">Home</a></li>
+            <li><a href="/pro" style="color: var(--udemy-gray-400); text-decoration: none; font-size: 0.875rem;">Pricing</a></li>
+            <li><a href="/app" style="color: var(--udemy-gray-400); text-decoration: none; font-size: 0.875rem;">Try Demo</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr style="border: none; height: 1px; background-color: var(--udemy-gray-700); margin: 32px 0;">
+      <div style="text-align: center;">
+        <p style="color: var(--udemy-gray-500); font-size: 0.875rem;">
+          © 2024 PracticeTestBulk. All rights reserved. • Powered by DeepSeek AI
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- External JavaScript -->
+  <script src="/static/js/pages/pro.js"></script>
+
+</body>
+</html>

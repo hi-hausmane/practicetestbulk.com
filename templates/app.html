@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Practice Tests - PracticeTestBulk</title>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Udemy Theme CSS -->
+  <link rel="stylesheet" href="/static/css/udemy-theme.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="udemy-nav" style="position: sticky; top: 0; z-index: 100; box-shadow: var(--udemy-shadow-sm);">
+    <div class="udemy-container nav-container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <a href="/" class="nav-logo" style="font-size: 1.5rem; font-weight: 700; color: var(--udemy-purple); text-decoration: none;">
+        PracticeTestBulk
+      </a>
+      <div class="nav-actions" style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <div class="nav-user-info" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <span id="user-username" class="udemy-body-sm" style="font-weight: 600; color: var(--udemy-gray-900);">User</span>
+          <span id="user-tier" class="udemy-badge udemy-badge-purple">FREE</span>
+          <span id="questions-remaining" class="udemy-body-sm" style="font-weight: 500; color: var(--udemy-gray-700); display: none; white-space: nowrap;">
+            <span style="color: var(--udemy-purple); font-weight: 600;" id="remaining-count">0</span> left
+          </span>
+        </div>
+        <a href="/pro" id="upgrade-btn" class="udemy-btn udemy-btn-primary udemy-btn-sm" style="display: none; text-decoration: none; white-space: nowrap;">
+          Upgrade ✨
+        </a>
+        <button onclick="logout()" class="udemy-btn udemy-btn-ghost udemy-btn-sm">
+          Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div style="background-color: var(--udemy-gray-100); min-height: calc(100vh - 73px); padding: 40px 0;">
+    <div class="udemy-container" style="max-width: 1200px;">
+
+      <!-- Usage Banner (for free tier) -->
+      <div id="usage-banner" class="udemy-card" style="margin-bottom: 24px; padding: 20px; border-left: 4px solid var(--udemy-purple); display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div style="flex: 1;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+              <h3 class="udemy-h4" style="margin: 0;">Your Usage This Month</h3>
+              <span id="usage-percentage" class="udemy-badge udemy-badge-purple"></span>
+            </div>
+            <div style="background-color: var(--udemy-gray-300); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 8px;">
+              <div id="usage-bar" style="background-color: var(--udemy-purple); height: 100%; width: 0%; transition: width 0.3s ease;"></div>
+            </div>
+            <p class="udemy-body-sm" style="color: var(--udemy-gray-600);">
+              <span id="usage-text">0 of 20 questions used</span>
+            </p>
+          </div>
+          <a href="/pro" class="udemy-btn udemy-btn-primary udemy-btn-md" style="text-decoration: none;">
+            Upgrade to Pro
+          </a>
+        </div>
+      </div>
+
+      <!-- Welcome Banner -->
+      <div class="udemy-card-elevated welcome-banner" style="margin-bottom: 32px; padding: 32px; background: linear-gradient(135deg, var(--udemy-purple-lightest) 0%, var(--udemy-white) 100%);">
+        <h1 class="udemy-h2" style="margin-bottom: 12px; color: var(--udemy-gray-900);">
+          Generate Practice Test Questions
+        </h1>
+        <p class="udemy-body" style="color: var(--udemy-gray-600); margin-bottom: 20px;">
+          Fill out the form below to create professional Udemy practice tests with AI. Download a ready-to-upload CSV file in seconds.
+        </p>
+        <div class="template-box" style="display: flex; align-items: center; gap: 12px; padding: 16px; background-color: var(--udemy-white); border-radius: 8px; border: 1px solid var(--udemy-gray-300); flex-wrap: wrap;">
+          <svg width="24" height="24" fill="var(--udemy-purple)" viewBox="0 0 20 20" style="flex-shrink: 0;">
+            <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"/>
+          </svg>
+          <div style="flex: 1; min-width: 200px;">
+            <p class="udemy-body-sm" style="font-weight: 600; margin-bottom: 4px; color: var(--udemy-gray-900);">Need a CSV template?</p>
+            <p class="udemy-caption" style="color: var(--udemy-gray-600);">Download the official Udemy CSV template with examples</p>
+          </div>
+          <a href="/static/files/udemy_template.csv" download="udemy_template.csv" class="udemy-btn udemy-btn-outline udemy-btn-md download-template-btn" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+            Download Template
+          </a>
+        </div>
+      </div>
+
+      <!-- Generator Form -->
+      <div class="udemy-card-elevated" style="padding: 40px;">
+        <form id="generatorForm">
+
+          <!-- Course Title -->
+          <div style="margin-bottom: 24px;">
+            <label class="udemy-label" for="workingTitle">Course Title *</label>
+            <input
+              type="text"
+              id="workingTitle"
+              class="udemy-input"
+              placeholder="e.g., Complete Python Programming Masterclass"
+              required
+            />
+          </div>
+
+          <!-- Category -->
+          <div style="margin-bottom: 24px;">
+            <label class="udemy-label" for="category">Category *</label>
+            <select id="category" class="udemy-input" required>
+              <option value="">Select category...</option>
+              <option value="IT & Software">IT & Software</option>
+              <option value="Business">Business</option>
+              <option value="Design">Design</option>
+              <option value="Personal Development">Personal Development</option>
+              <option value="Teaching & Academics">Teaching & Academics</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Finance">Finance</option>
+              <option value="Health & Fitness">Health & Fitness</option>
+              <option value="Lifestyle">Lifestyle</option>
+              <option value="Music">Music</option>
+              <option value="Photography & Video">Photography & Video</option>
+              <option value="Office Productivity">Office Productivity</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <!-- Learning Objectives -->
+          <div style="margin-bottom: 24px;">
+            <label class="udemy-label">Learning Objectives * (min 4, max 160 chars each)</label>
+            <div id="objectivesContainer" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px;">
+              <div style="display: flex; gap: 8px;">
+                <input
+                  type="text"
+                  maxlength="160"
+                  required
+                  class="udemy-input objective-input"
+                  placeholder="What will students learn? (e.g., Build web applications with Python and Flask)"
+                  style="flex: 1;"
+                />
+                <button type="button" onclick="removeObjective(this)" class="udemy-btn udemy-btn-ghost udemy-btn-sm" style="display: none; color: var(--udemy-error);">✕</button>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <input
+                  type="text"
+                  maxlength="160"
+                  required
+                  class="udemy-input objective-input"
+                  placeholder="Learning objective 2"
+                  style="flex: 1;"
+                />
+                <button type="button" onclick="removeObjective(this)" class="udemy-btn udemy-btn-ghost udemy-btn-sm" style="display: none; color: var(--udemy-error);">✕</button>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <input
+                  type="text"
+                  maxlength="160"
+                  required
+                  class="udemy-input objective-input"
+                  placeholder="Learning objective 3"
+                  style="flex: 1;"
+                />
+                <button type="button" onclick="removeObjective(this)" class="udemy-btn udemy-btn-ghost udemy-btn-sm" style="display: none; color: var(--udemy-error);">✕</button>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <input
+                  type="text"
+                  maxlength="160"
+                  required
+                  class="udemy-input objective-input"
+                  placeholder="Learning objective 4"
+                  style="flex: 1;"
+                />
+                <button type="button" onclick="removeObjective(this)" class="udemy-btn udemy-btn-ghost udemy-btn-sm" style="display: none; color: var(--udemy-error);">✕</button>
+              </div>
+            </div>
+            <button type="button" onclick="addObjective()" class="udemy-btn udemy-btn-link" style="font-size: 0.875rem;">
+              + Add another objective
+            </button>
+          </div>
+
+          <!-- Requirements/Prerequisites -->
+          <div style="margin-bottom: 24px;">
+            <label class="udemy-label" for="requirements">Requirements / Prerequisites</label>
+            <textarea
+              id="requirements"
+              rows="3"
+              class="udemy-input"
+              placeholder="e.g., Basic understanding of programming concepts, computer with internet access"
+            ></textarea>
+            <span class="udemy-helper-text">What students should know before taking your course</span>
+          </div>
+
+          <!-- Target Audience -->
+          <div style="margin-bottom: 24px;">
+            <label class="udemy-label" for="targetAudience">Who is this course for?</label>
+            <textarea
+              id="targetAudience"
+              rows="3"
+              class="udemy-input"
+              placeholder="e.g., Aspiring web developers, career changers, students learning programming"
+            ></textarea>
+            <span class="udemy-helper-text">Describe your ideal student</span>
+          </div>
+
+          <!-- Practice Test Title -->
+          <div style="margin-bottom: 24px;">
+            <label class="udemy-label" for="practiceTestTitle">Practice Test Title *</label>
+            <input
+              type="text"
+              id="practiceTestTitle"
+              class="udemy-input"
+              placeholder="e.g., Practice Test 1: Python Fundamentals"
+              required
+            />
+            <span class="udemy-helper-text">Udemy allows up to 6 practice tests per course, each focusing on a specific chapter or topic area. Specify which practice test you're generating (e.g., "Practice Test 1: Basics", "Practice Test 2: Advanced Concepts", etc.)</span>
+          </div>
+
+          <!-- Difficulty & Question Count Row -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-bottom: 24px;">
+            <!-- Difficulty Level -->
+            <div>
+              <label class="udemy-label" for="difficultyLevel">Difficulty Level *</label>
+              <select id="difficultyLevel" class="udemy-input" required>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+                <option value="mixed">Mixed</option>
+              </select>
+            </div>
+
+            <!-- Number of Questions -->
+            <div>
+              <label class="udemy-label" for="numQuestions">Number of Questions *</label>
+              <input
+                type="number"
+                id="numQuestions"
+                min="1"
+                max="250"
+                value="10"
+                class="udemy-input"
+                required
+              />
+              <span class="udemy-helper-text">1-250 questions (each Udemy practice test can have up to 250 questions)</span>
+            </div>
+          </div>
+
+          <!-- Question Formats -->
+          <div style="margin-bottom: 24px;">
+            <label class="udemy-label" style="margin-bottom: 12px;">Question Formats *</label>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+              <label style="display: flex; align-items: center; gap: 8px; padding: 12px; border: 1px solid var(--udemy-gray-400); border-radius: 4px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--udemy-purple)'" onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='var(--udemy-gray-400)'">
+                <input type="checkbox" name="questionFormat" value="single-choice" style="width: 18px; height: 18px; accent-color: var(--udemy-purple);">
+                <span class="udemy-body-sm" style="font-weight: 500;">Single Choice</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; padding: 12px; border: 1px solid var(--udemy-gray-400); border-radius: 4px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--udemy-purple)'" onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='var(--udemy-gray-400)'">
+                <input type="checkbox" name="questionFormat" value="multiple-select" style="width: 18px; height: 18px; accent-color: var(--udemy-purple);">
+                <span class="udemy-body-sm" style="font-weight: 500;">Multiple Select</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; padding: 12px; border: 1px solid var(--udemy-gray-400); border-radius: 4px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--udemy-purple)'" onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='var(--udemy-gray-400)'">
+                <input type="checkbox" name="questionFormat" value="true-false" style="width: 18px; height: 18px; accent-color: var(--udemy-purple);">
+                <span class="udemy-body-sm" style="font-weight: 500;">True/False</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; padding: 12px; border: 1px solid var(--udemy-gray-400); border-radius: 4px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--udemy-purple)'" onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='var(--udemy-gray-400)'">
+                <input type="checkbox" name="questionFormat" value="scenario-based" style="width: 18px; height: 18px; accent-color: var(--udemy-purple);">
+                <span class="udemy-body-sm" style="font-weight: 500;">Scenario-based</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; padding: 12px; border: 1px solid var(--udemy-gray-400); border-radius: 4px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--udemy-purple)'" onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='var(--udemy-gray-400)'">
+                <input type="checkbox" name="questionFormat" value="mix-all" style="width: 18px; height: 18px; accent-color: var(--udemy-purple);">
+                <span class="udemy-body-sm" style="font-weight: 600;">Mix All</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Explanation Style -->
+          <div style="margin-bottom: 32px;">
+            <label class="udemy-label" for="explanationStyle">Explanation Style *</label>
+            <select id="explanationStyle" class="udemy-input" required>
+              <option value="beginner-friendly">Beginner-friendly</option>
+              <option value="technical">Technical</option>
+              <option value="very-detailed">Very detailed</option>
+              <option value="short-concise">Short/concise</option>
+              <option value="fun-casual">Fun/casual</option>
+              <option value="academic">Academic</option>
+            </select>
+            <span class="udemy-helper-text">Choose the tone for answer explanations</span>
+          </div>
+
+          <!-- Status Messages -->
+          <div id="statusMessage" style="display: none; margin-bottom: 24px;"></div>
+
+          <!-- Submit Buttons -->
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <button
+              type="submit"
+              id="generateBtn"
+              class="udemy-btn udemy-btn-primary udemy-btn-lg"
+              style="flex: 1; min-width: 200px;"
+            >
+              Generate & Download CSV
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- External JavaScript -->
+  <script src="/static/js/pages/app.js"></script>
+
+</body>
+</html>

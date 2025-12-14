@@ -1,0 +1,20 @@
+<!-- Navigation for App Pages (requires authentication) -->
+<nav class="udemy-nav" style="position: sticky; top: 0; z-index: 100; box-shadow: var(--udemy-shadow-sm);">
+  <div class="udemy-container" style="display: flex; justify-content: space-between; align-items: center;">
+    <a href="/" style="font-size: 1.5rem; font-weight: 700; color: var(--udemy-purple); text-decoration: none;">
+      PracticeTestBulk
+    </a>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span id="user-username" class="udemy-body-sm" style="font-weight: 600; color: var(--udemy-gray-900);">User</span>
+        <span id="user-tier" class="udemy-badge udemy-badge-purple">FREE</span>
+      </div>
+      <a href="/pro" id="upgrade-btn" class="udemy-btn udemy-btn-primary udemy-btn-sm" style="display: none; text-decoration: none;">
+        Upgrade ✨
+      </a>
+      <button onclick="logout()" class="udemy-btn udemy-btn-ghost udemy-btn-sm">
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>
