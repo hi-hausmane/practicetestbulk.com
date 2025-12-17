@@ -9,24 +9,42 @@
 -- Function to handle new user creation
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
+DECLARE
+  provider_name TEXT;
+  is_oauth BOOLEAN := false;
 BEGIN
-  -- Only auto-create for OAuth users (Google, etc.)
-  -- Regular email/password signups are handled by the backend
-  -- Check if this is an OAuth signup by looking at app_metadata.provider
-  IF NEW.raw_app_metadata->>'provider' IN ('google', 'github', 'gitlab', 'bitbucket', 'azure', 'facebook') THEN
-    -- Insert into public.users for OAuth signups only
+  -- Check multiple ways to detect OAuth signups
+  -- 1. Check app_metadata.provider
+  provider_name := NEW.raw_app_metadata->>'provider';
+
+  -- 2. Also check if providers array contains OAuth providers
+  IF provider_name IN ('google', 'github', 'gitlab', 'bitbucket', 'azure', 'facebook') THEN
+    is_oauth := true;
+  ELSIF NEW.raw_app_metadata->'providers' @> '["google"]'::jsonb THEN
+    is_oauth := true;
+    provider_name := 'google';
+  ELSIF NEW.raw_app_metadata->'providers' @> '["github"]'::jsonb THEN
+    is_oauth := true;
+    provider_name := 'github';
+  END IF;
+
+  -- If it's an OAuth user, auto-create the public.users record
+  IF is_oauth THEN
     INSERT INTO public.users (id, username, email, tier, email_verified, monthly_chars_used)
     VALUES (
       NEW.id,
-      COALESCE(NEW.raw_user_meta_data->>'name', NEW.raw_user_meta_data->>'full_name', SPLIT_PART(NEW.email, '@', 1)), -- Use OAuth name or email prefix
+      COALESCE(NEW.raw_user_meta_data->>'name', NEW.raw_user_meta_data->>'full_name', SPLIT_PART(NEW.email, '@', 1)),
       NEW.email,
       'free',
       true, -- OAuth users are pre-verified by the provider
       0
     )
-    ON CONFLICT (id) DO NOTHING; -- Prevent duplicate insertion
+    ON CONFLICT (id) DO NOTHING;
 
-    RAISE LOG 'Auto-created public.users for OAuth user: % (provider: %)', NEW.email, NEW.raw_app_metadata->>'provider';
+    RAISE LOG 'Auto-created public.users for OAuth user: % (provider: %)', NEW.email, provider_name;
+  ELSE
+    -- For email/password signups, backend will handle it
+    RAISE LOG 'Email/password signup detected for: %, skipping auto-create', NEW.email;
   END IF;
 
   RETURN NEW;
@@ -43,7 +61,7 @@ CREATE TRIGGER on_auth_user_created
   EXECUTE FUNCTION public.handle_new_user();
 
 -- ============================================================================
--- VERIFICATION
+-- VERIFICATION & DEBUGGING
 -- ============================================================================
 -- Test the trigger is installed correctly
 
@@ -54,3 +72,23 @@ SELECT
   action_statement
 FROM information_schema.triggers
 WHERE trigger_name = 'on_auth_user_created';
+
+-- ============================================================================
+-- DEBUG: Check existing OAuth users
+-- ============================================================================
+-- Run this to see the metadata structure of your OAuth users
+-- This helps debug if the trigger isn't working
+
+SELECT
+  id,
+  email,
+  email_confirmed_at,
+  raw_app_metadata->>'provider' as provider,
+  raw_app_metadata->'providers' as providers_array,
+  raw_user_meta_data->>'name' as google_name,
+  raw_user_meta_data->>'full_name' as full_name,
+  created_at
+FROM auth.users
+WHERE email_confirmed_at IS NOT NULL
+ORDER BY created_at DESC
+LIMIT 5;
