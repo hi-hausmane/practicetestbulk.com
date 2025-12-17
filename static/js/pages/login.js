@@ -36,13 +36,16 @@ document.addEventListener('DOMContentLoaded', function() {
   // Handle Google login button
   const googleBtn = document.getElementById("google-login-btn");
   if (googleBtn) {
+    console.log('[LOGIN] Google login button found, attaching event listener');
     googleBtn.addEventListener("click", async () => {
+      console.log('[LOGIN] Google login button clicked');
       const btn = document.getElementById("google-login-btn");
       const originalHTML = btn.innerHTML;
       btn.innerHTML = '<span>Connecting to Google...</span>';
       btn.disabled = true;
 
       try {
+        console.log('[LOGIN] Calling Supabase signInWithOAuth...');
         const { data, error } = await supabase.auth.signInWithOAuth({
           provider: 'google',
           options: {
@@ -50,20 +53,24 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
 
+        console.log('[LOGIN] OAuth response:', { data, error });
+
         if (error) {
+          console.error('[LOGIN] OAuth error:', error);
           alert('Google sign-in failed: ' + error.message);
           btn.innerHTML = originalHTML;
           btn.disabled = false;
         }
         // If successful, user will be redirected to Google login
       } catch (err) {
+        console.error('[LOGIN] Exception during OAuth:', err);
         alert('Error: ' + err.message);
         btn.innerHTML = originalHTML;
         btn.disabled = false;
       }
     });
   } else {
-    console.error('Google login button not found');
+    console.error('[LOGIN] Google login button not found');
   }
 
   // Handle login form submission
