@@ -83,8 +83,8 @@ SELECT
   id,
   email,
   email_confirmed_at,
-  raw_app_metadata->>'provider' as provider,
-  raw_app_metadata->'providers' as providers_array,
+  raw_app_meta_data->>'provider' as provider,
+  raw_app_meta_data->'providers' as providers_array,
   raw_user_meta_data->>'name' as google_name,
   raw_user_meta_data->>'full_name' as full_name,
   created_at
