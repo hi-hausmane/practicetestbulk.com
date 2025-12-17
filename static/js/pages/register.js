@@ -12,11 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // Check for OAuth callback with session
+  // Only handle SIGNED_IN event after OAuth redirect (not on page load)
   supabase.auth.onAuthStateChange(async (event, session) => {
     if (event === 'SIGNED_IN' && session) {
-      // User signed in with Google
-      localStorage.setItem("access_token", session.access_token);
-      window.location.href = "/app";
+      // Check if this is from OAuth callback (URL will have access_token hash)
+      if (window.location.hash.includes('access_token')) {
+        console.log('[AUTH] OAuth callback detected, redirecting to /app');
+        localStorage.setItem("access_token", session.access_token);
+        window.location.href = "/app";
+      }
     }
   });
 
