@@ -14,15 +14,17 @@ Run the SQL script to create an auto-trigger:
 **File:** `database/google_oauth_trigger.sql`
 
 **Steps:**
-1. Go to Supabase Dashboard → SQL Editor
+1. Go to Supabase Dashboard → SQL Editor: https://supabase.com/dashboard/project/fxtaavvvsjcwmyvzpook/sql/new
 2. Copy and paste the contents of `database/google_oauth_trigger.sql`
 3. Click "Run"
 
 **What it does:**
 - Creates a trigger `on_auth_user_created` on the `auth.users` table
-- When a new user signs up (via Google or any method), automatically creates a record in `public.users`
+- **Only triggers for OAuth signups** (Google, GitHub, etc.) - not for regular email/password signups
+- Regular email/password signups are handled by the backend code in `auth/routes.py`
 - Sets default values: tier=free, email_verified=true (OAuth users are pre-verified)
 - Uses Google name from metadata or email prefix as username
+- Uses `ON CONFLICT DO NOTHING` to prevent duplicate insertion errors
 
 ---
 

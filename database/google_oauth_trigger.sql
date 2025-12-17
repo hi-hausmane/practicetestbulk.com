@@ -10,17 +10,24 @@
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  -- Insert into public.users when a new user is created in auth.users
-  INSERT INTO public.users (id, username, email, tier, email_verified, monthly_chars_used)
-  VALUES (
-    NEW.id,
-    COALESCE(NEW.raw_user_meta_data->>'name', SPLIT_PART(NEW.email, '@', 1)), -- Use Google name or email prefix
-    NEW.email,
-    'free',
-    NEW.email_confirmed_at IS NOT NULL, -- OAuth users are pre-verified
-    0
-  )
-  ON CONFLICT (id) DO NOTHING; -- Prevent duplicate insertion
+  -- Only auto-create for OAuth users (Google, etc.)
+  -- Regular email/password signups are handled by the backend
+  -- Check if this is an OAuth signup by looking at app_metadata.provider
+  IF NEW.raw_app_metadata->>'provider' IN ('google', 'github', 'gitlab', 'bitbucket', 'azure', 'facebook') THEN
+    -- Insert into public.users for OAuth signups only
+    INSERT INTO public.users (id, username, email, tier, email_verified, monthly_chars_used)
+    VALUES (
+      NEW.id,
+      COALESCE(NEW.raw_user_meta_data->>'name', NEW.raw_user_meta_data->>'full_name', SPLIT_PART(NEW.email, '@', 1)), -- Use OAuth name or email prefix
+      NEW.email,
+      'free',
+      true, -- OAuth users are pre-verified by the provider
+      0
+    )
+    ON CONFLICT (id) DO NOTHING; -- Prevent duplicate insertion
+
+    RAISE LOG 'Auto-created public.users for OAuth user: % (provider: %)', NEW.email, NEW.raw_app_metadata->>'provider';
+  END IF;
 
   RETURN NEW;
 END;
