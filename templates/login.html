@@ -97,15 +97,21 @@
         </div>
 
         <!-- Google OAuth -->
-        <a
-          href="https://xyiembiswrhhdaalntet.supabase.co/auth/v1/authorize?provider=google"
+        <button
+          id="google-login-btn"
+          type="button"
           style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; box-sizing: border-box; padding: 12px 24px; background-color: var(--udemy-white); border: 1px solid var(--udemy-gray-400); border-radius: 4px; font-size: 1rem; font-weight: 600; color: var(--udemy-gray-900); text-decoration: none; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); cursor: pointer;"
           onmouseover="this.style.backgroundColor='var(--udemy-gray-100)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.1)';"
           onmouseout="this.style.backgroundColor='var(--udemy-white)'; this.style.boxShadow='0 1px 2px rgba(0, 0, 0, 0.05)';"
         >
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" style="width: 20px; height: 20px;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M19.6 10.23c0-.82-.1-1.42-.25-2.05H10v3.72h5.5c-.15.96-.74 2.31-2.04 3.22v2.45h3.16c1.89-1.73 2.98-4.3 2.98-7.34z" fill="#4285F4"/>
+            <path d="M13.46 15.13c-.83.59-1.96 1-3.46 1-2.64 0-4.88-1.74-5.68-4.15H1.07v2.52C2.72 17.75 6.09 20 10 20c2.7 0 4.96-.89 6.62-2.42l-3.16-2.45z" fill="#34A853"/>
+            <path d="M3.99 10c0-.69.12-1.35.32-1.97V5.51H1.07A9.973 9.973 0 000 10c0 1.61.39 3.14 1.07 4.49l3.24-2.52c-.2-.62-.32-1.28-.32-1.97z" fill="#FBBC05"/>
+            <path d="M10 3.88c1.88 0 3.13.81 3.85 1.48l2.84-2.76C14.96.99 12.7 0 10 0 6.09 0 2.72 2.25 1.07 5.51l3.24 2.52C5.12 5.62 7.36 3.88 10 3.88z" fill="#EA4335"/>
+          </svg>
           <span>Continue with Google</span>
-        </a>
+        </button>
 
         <!-- Register Link -->
         <div style="margin-top: 32px; text-align: center;">
@@ -131,6 +137,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="/static/js/pages/login.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/static/js/pages/login.js?v=2"></script>
 </body>
 </html>
