@@ -2,6 +2,24 @@
 
 // Check authentication status and update buttons
 document.addEventListener('DOMContentLoaded', () => {
+  // Handle OAuth callback - check if access_token is in URL hash
+  if (window.location.hash.includes('access_token')) {
+    console.log('[LANDING] OAuth callback detected, extracting token');
+
+    // Extract access_token from URL hash
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    const accessToken = hashParams.get('access_token');
+
+    if (accessToken) {
+      console.log('[LANDING] Storing token and redirecting to /app');
+      localStorage.setItem('access_token', accessToken);
+
+      // Redirect to app
+      window.location.href = '/app';
+      return; // Stop further execution
+    }
+  }
+
   const isLoggedIn = Auth.isAuthenticated();
 
   // Update main CTA button
