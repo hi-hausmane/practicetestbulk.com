@@ -139,7 +139,7 @@ async def create_checkout_session(request: Request, user = Depends(get_current_u
         print(f"Creating checkout session with price: {price_id} for tier: {tier_name}")
 
         # Use production URL or localhost based on environment
-        base_url = os.getenv("BASE_URL", "https://ssml2mp3.com")
+        base_url = os.getenv("BASE_URL", "https://practicetestbulk.com")
 
         checkout_session = stripe.checkout.Session.create(
             customer=stripe_customer_id,
@@ -179,7 +179,7 @@ async def customer_portal(user = Depends(get_current_user)):
 
         portal_session = stripe.billing_portal.Session.create(
             customer=stripe_customer_id,
-            return_url='https://ssml2mp3.com/app',
+            return_url=f'{os.getenv("BASE_URL", "https://practicetestbulk.com")}/app',
         )
 
         return {"portal_url": portal_session.url}
