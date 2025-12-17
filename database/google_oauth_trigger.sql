@@ -14,16 +14,16 @@ DECLARE
   is_oauth BOOLEAN := false;
 BEGIN
   -- Check multiple ways to detect OAuth signups
-  -- 1. Check app_metadata.provider
-  provider_name := NEW.raw_app_metadata->>'provider';
+  -- 1. Check app_meta_data.provider (note: it's raw_app_meta_data, not raw_app_metadata)
+  provider_name := NEW.raw_app_meta_data->>'provider';
 
   -- 2. Also check if providers array contains OAuth providers
   IF provider_name IN ('google', 'github', 'gitlab', 'bitbucket', 'azure', 'facebook') THEN
     is_oauth := true;
-  ELSIF NEW.raw_app_metadata->'providers' @> '["google"]'::jsonb THEN
+  ELSIF NEW.raw_app_meta_data->'providers' @> '["google"]'::jsonb THEN
     is_oauth := true;
     provider_name := 'google';
-  ELSIF NEW.raw_app_metadata->'providers' @> '["github"]'::jsonb THEN
+  ELSIF NEW.raw_app_meta_data->'providers' @> '["github"]'::jsonb THEN
     is_oauth := true;
     provider_name := 'github';
   END IF;
@@ -41,10 +41,10 @@ BEGIN
     )
     ON CONFLICT (id) DO NOTHING;
 
-    RAISE LOG 'Auto-created public.users for OAuth user: % (provider: %)', NEW.email, provider_name;
+    RAISE NOTICE 'Auto-created public.users for OAuth user: % (provider: %)', NEW.email, provider_name;
   ELSE
     -- For email/password signups, backend will handle it
-    RAISE LOG 'Email/password signup detected for: %, skipping auto-create', NEW.email;
+    RAISE NOTICE 'Email/password signup detected for: %, skipping auto-create', NEW.email;
   END IF;
 
   RETURN NEW;

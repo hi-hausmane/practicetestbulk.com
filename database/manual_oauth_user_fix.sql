@@ -9,8 +9,8 @@
 SELECT
   au.id,
   au.email,
-  au.raw_app_metadata->>'provider' as provider,
-  au.raw_app_metadata->'providers' as providers_array,
+  au.raw_app_meta_data->>'provider' as provider,
+  au.raw_app_meta_data->'providers' as providers_array,
   au.raw_user_meta_data->>'name' as google_name,
   CASE WHEN pu.id IS NULL THEN 'MISSING' ELSE 'EXISTS' END as status
 FROM auth.users au
@@ -37,9 +37,9 @@ LEFT JOIN public.users pu ON au.id = pu.id
 WHERE au.email_confirmed_at IS NOT NULL
   AND pu.id IS NULL  -- Only insert if not already in public.users
   AND (
-    au.raw_app_metadata->>'provider' IN ('google', 'github', 'gitlab', 'bitbucket', 'azure', 'facebook')
-    OR au.raw_app_metadata->'providers' @> '["google"]'::jsonb
-    OR au.raw_app_metadata->'providers' @> '["github"]'::jsonb
+    au.raw_app_meta_data->>'provider' IN ('google', 'github', 'gitlab', 'bitbucket', 'azure', 'facebook')
+    OR au.raw_app_meta_data->'providers' @> '["google"]'::jsonb
+    OR au.raw_app_meta_data->'providers' @> '["github"]'::jsonb
   )
 ON CONFLICT (id) DO NOTHING;
 
